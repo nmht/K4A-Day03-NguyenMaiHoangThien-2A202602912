@@ -38,7 +38,13 @@ class MockOfflineProvider(BaseLLMProvider):
         prompt_lower = prompt.lower()
         
         # Mô phỏng nhận diện intent gọi Tool
-        if "sv2026001" in prompt_lower and "đặt lịch" in prompt_lower:
+        if "observation từ" in prompt_lower:
+            return {
+                "type": "text",
+                "content": f"[Mock Agent Response]: Dựa vào kết quả tra cứu, hệ thống đã ghi nhận thông tin. Cảm ơn bạn!",
+                "thought": "Đã có kết quả Observation từ tool, tiến hành tổng hợp thành câu trả lời cuối cùng."
+            }
+        elif "sv2026001" in prompt_lower and "đặt lịch" in prompt_lower:
             return {
                 "type": "tool_call",
                 "tool_name": "schedule_appointment",

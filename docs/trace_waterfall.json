@@ -3,9 +3,9 @@
     "step": 1,
     "query": "Chào bạn, bạn có thể giới thiệu quy chế học vụ cơ bản của Đại học VinUni không?",
     "action_type": "FINAL_ANSWER",
-    "thought": "Câu hỏi chung về quy chế học vụ, trả lời trực tiếp không cần gọi Tool.",
-    "output": "[Mock Agent Response]: Xin chào! Quy chế học vụ VinUni yêu cầu sinh viên tích lũy tối thiểu 120 tín chỉ và duy trì GPA trên 2.0 để tốt nghiệp.",
-    "latency_ms": 2845.93
+    "thought": "Gemini phản hồi trực tiếp bằng văn bản (không cần gọi công cụ).",
+    "output": "Chào bạn! Đại học VinUni áp dụng các quy chế học vụ theo tiêu chuẩn quốc tế (đặc biệt tham chiếu theo chuẩn của các trường đại học hàng đầu thế giới như Ivy League) để đảm bảo chất lượng đào tạo. Dưới đây là những điểm cơ bản trong quy chế học vụ tại VinUni:\n\n1. **Hệ thống tín dụng và Thời gian học tập:**\n   * VinUni áp dụng hệ thống tín dụng (Credit System).\n   * Thời gian chuẩn để hoàn thành chương trình Cử nhân thường là **4 năm** (có thể rút ngắn hoặc kéo dài tùy thuộc vào kế hoạch học tập của sinh viên và sự cho phép của trường).\n\n2. **Đánh giá kết quả học tập (Grading System):**\n   * Kết quả học tập được đánh giá qua điểm chữ (A, B, C, D, F) tương ứng với thang điểm GPA (Grade Point Average) trên hệ thống 4.0.\n   * Sinh viên cần duy trì điểm GPA tối thiểu theo quy định của trường (thường là từ 2.0/4.0 trở lên) để đảm bảo tình trạng học tập tốt (Good Standing).\n\n3. **Cảnh báo học vụ và Đình chỉ (Academic Warning & Suspension):**\n   * Nếu GPA hoặc điểm tích lũy của sinh viên rơi xuống dưới ngưỡng cho phép trong một học kỳ, sinh viên có thể nhận cảnh báo học vụ.\n   * Nếu tiếp tục không cải thiện trong các học kỳ tiếp theo, sinh viên có thể đối mặt với hình thức đình chỉ học tập hoặc buộc thôi học theo quy định cụ thể của Viện/Trường.\n\n4. **Đăng ký môn học và Cố vấn học tập (Academic Advising):**\n   * Trước mỗi học kỳ, sinh viên phải làm việc với Cố vấn học tập (Academic Advisor) để lập kế hoạch môn học phù hợp với ngành học và lộ trình cá nhân.\n   * Việc đăng ký môn học phải tuân thủ các điều kiện tiên quyết (Prerequisites) của từng môn.\n\nNếu bạn cần tra cứu thông tin cụ thể về hồ sơ học vụ của riêng mình (như điểm số, tình trạng học tập) hoặc cần đặt lịch hẹn với Cố vấn học tập, hãy cung cấp mã sinh viên cho mình nhé!",
+    "latency_ms": 4091.41
   },
   {
     "step": 1,
@@ -15,15 +15,50 @@
     "arguments": {
       "student_id": "SV2026001"
     },
-    "observation": {},
-    "latency_ms": 799.12
+    "observation": {
+      "status": "SUCCESS",
+      "student_id": "SV2026001",
+      "data": {
+        "full_name": "Nguyễn Văn An",
+        "class": "AI-K4",
+        "gpa": 3.85,
+        "email": "an.nv@vinuni.edu.vn",
+        "status": "Đang học",
+        "advisor": "PGS.TS Nguyễn Văn A"
+      }
+    },
+    "latency_ms": 897.8
   },
   {
     "step": 2,
     "query": "Hãy tra cứu thông tin học vụ của sinh viên SV2026001.",
     "action_type": "FINAL_ANSWER",
-    "thought": "Tổng hợp kết quả từ MCP Server thành công.",
-    "output": "Chưa thể trả lời chi tiết do chưa nhận được dữ liệu từ MCP Server (hãy hoàn thành TODO 2.1).",
-    "latency_ms": 10.0
+    "thought": "Gemini phản hồi trực tiếp bằng văn bản (không cần gọi công cụ).",
+    "output": "Dựa trên kết quả tra cứu từ hệ thống học vụ VinUni, dưới đây là thông tin chi tiết của sinh viên:\n\n* **Mã sinh viên:** SV2026001\n* **Họ và tên:** Nguyễn Văn An\n* **Lớp:** AI-K4\n* **GPA hiện tại:** 3.85\n* **Email:** an.nv@vinuni.edu.vn\n* **Trạng thái học tập:** Đang học\n* **Cố vấn học tập:** PGS.TS Nguyễn Văn A",
+    "latency_ms": 1103.65
+  },
+  {
+    "step": 1,
+    "query": "Cập nhật trạng thái của mã vận đơn DH2026001 thành 'Đã giao thành công'.",
+    "action_type": "FINAL_ANSWER",
+    "thought": "Gemini phản hồi trực tiếp bằng văn bản (không cần gọi công cụ).",
+    "output": "Thought: Người dùng muốn cập nhật trạng thái của mã vận đơn \"DH2026001\" thành \"Đã giao thành công\". Tuy nhiên, hệ thống của tôi là Trợ lý Tác tử Học vụ Thông minh của Đại học VinUni, chuyên hỗ trợ tra cứu hồ sơ học vụ và đặt lịch hẹn tư vấn học tập cho sinh viên. Tôi không có công cụ hoặc chức năng liên quan đến việc quản lý vận đơn hay cập nhật trạng thái giao hàng.\n\nDo đó, tôi sẽ thông báo cho người dùng biết giới hạn chức năng của mình một cách lịch sự và chính xác.Xin lỗi bạn, tôi là Trợ lý Học vụ của Đại học VinUni, chuyên hỗ trợ các vấn đề về hồ sơ học vụ, điểm số và đặt lịch tư vấn cho sinh viên. Tôi không có quyền hạn hoặc công cụ để quản lý và cập nhật trạng thái vận đơn hay giao hàng. \n\nNếu bạn cần hỗ trợ về các vấn đề học vụ tại VinUni, vui lòng cho tôi biết nhé!",
+    "latency_ms": 1592.85
+  },
+  {
+    "step": 1,
+    "query": "Tra cứu vị trí hiện tại của đơn hàng DH2026002, nếu đang ở 'Kho Tổng' thì cập nhật trạng thái thành 'Đang điều phối xuất kho'.",
+    "action_type": "FINAL_ANSWER",
+    "thought": "Gemini phản hồi trực tiếp bằng văn bản (không cần gọi công cụ).",
+    "output": "Chào bạn, với tư cách là Trợ lý Tác tử Học vụ Thông minh (ReAct Agent Assistant) của Đại học VinUni, hệ thống của tôi chuyên hỗ trợ các vấn đề về học tập, hồ sơ sinh viên, điểm số và đặt lịch tư vấn học vụ tại trường. \n\nHiện tại, hệ thống học vụ của VinUni không quản lý hoặc tra cứu thông tin về các đơn hàng thương mại điện tử (như mã đơn hàng `DH2026002`). Do đó, tôi không thể kiểm tra vị trí hoặc cập nhật trạng thái đơn hàng này giúp bạn được. \n\nNếu bạn cần hỗ trợ về các vấn đề liên quan đến học tập, điểm số, hoặc đặt lịch hẹn với Cố vấn học tập tại VinUni, xin vui lòng cho tôi biết nhé!",
+    "latency_ms": 1593.55
+  },
+  {
+    "step": 1,
+    "query": "Kiểm tra mã vận đơn DH9999999 xem đang ở kho nào.",
+    "action_type": "FINAL_ANSWER",
+    "thought": "Câu hỏi chung về quy chế học vụ, trả lời trực tiếp không cần gọi Tool.",
+    "output": "[Mock Agent Response]: Xin chào! Quy chế học vụ VinUni yêu cầu sinh viên tích lũy tối thiểu 120 tín chỉ và duy trì GPA trên 2.0 để tốt nghiệp.",
+    "latency_ms": 516.97
   }
 ]
