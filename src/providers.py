@@ -37,13 +37,39 @@ class MockOfflineProvider(BaseLLMProvider):
     def generate_with_tools(self, prompt: str, tools_schema: List[Dict[str, Any]], system_prompt: str = "") -> Dict[str, Any]:
         prompt_lower = prompt.lower()
         
-        # Mô phỏng nhận diện intent gọi Tool
+        # Nếu đã có Observation từ vòng trước → tổng hợp và dừng vòng lặp
         if "observation từ" in prompt_lower:
             return {
                 "type": "text",
-                "content": f"[Mock Agent Response]: Dựa vào kết quả tra cứu, hệ thống đã ghi nhận thông tin. Cảm ơn bạn!",
-                "thought": "Đã có kết quả Observation từ tool, tiến hành tổng hợp thành câu trả lời cuối cùng."
+                "content": "[Mock Agent Response]: Dựa vào kết quả từ hệ thống, tôi đã có đủ thông tin để phản hồi yêu cầu của bạn.",
+                "thought": "Đã nhận được Observation từ tool, tổng hợp thành câu trả lời cuối cùng."
             }
+
+        # --- NHẬN DIỆN NGHIỆP VỤ KHO VẬN ---
+        import re
+        order_match = re.search(r'dh\d+', prompt_lower)
+        if order_match:
+            order_id = order_match.group(0).upper()
+            if "cập nhật" in prompt_lower or "update" in prompt_lower:
+                # Trích xuất trạng thái mới từ dấu ngoặc đơn hoặc từ cuối câu
+                status_match = re.search(r"""['"](.+?)['"]""", prompt)
+                new_status = status_match.group(1) if status_match else "Đã cập nhật"
+
+                return {
+                    "type": "tool_call",
+                    "tool_name": "order_status_update",
+                    "arguments": {"order_id": order_id, "new_status": new_status},
+                    "thought": f"Người dùng yêu cầu cập nhật trạng thái đơn hàng {order_id}. Tôi sẽ gọi tool order_status_update."
+                }
+            else:
+                return {
+                    "type": "tool_call",
+                    "tool_name": "order_tracking",
+                    "arguments": {"order_id": order_id},
+                    "thought": f"Người dùng muốn tra cứu đơn hàng {order_id}. Tôi sẽ gọi tool order_tracking."
+                }
+
+        # --- NHẬN DIỆN NGHIỆP VỤ HỌC VỤ ---
         elif "sv2026001" in prompt_lower and "đặt lịch" in prompt_lower:
             return {
                 "type": "tool_call",
@@ -51,18 +77,19 @@ class MockOfflineProvider(BaseLLMProvider):
                 "arguments": {"student_id": "SV2026001", "datetime_str": "14:00 15/09/2026", "advisor_name": "PGS.TS Nguyễn Văn A"},
                 "thought": "Người dùng yêu cầu đặt lịch hẹn tư vấn cho sinh viên SV2026001. Tôi sẽ gọi tool schedule_appointment."
             }
-        elif "sv2026001" in prompt_lower or "tra cứu" in prompt_lower:
+        elif "sv2026001" in prompt_lower or "sv2026002" in prompt_lower:
+            sid = "SV2026002" if "sv2026002" in prompt_lower else "SV2026001"
             return {
                 "type": "tool_call",
                 "tool_name": "academic_query",
-                "arguments": {"student_id": "SV2026001"},
-                "thought": "Người dùng muốn tra cứu thông tin học vụ của sinh viên SV2026001. Tôi sẽ gọi tool academic_query."
+                "arguments": {"student_id": sid},
+                "thought": f"Người dùng muốn tra cứu thông tin học vụ của sinh viên {sid}. Tôi sẽ gọi tool academic_query."
             }
         else:
             return {
                 "type": "text",
-                "content": f"[Mock Agent Response]: Xin chào! Quy chế học vụ VinUni yêu cầu sinh viên tích lũy tối thiểu 120 tín chỉ và duy trì GPA trên 2.0 để tốt nghiệp.",
-                "thought": "Câu hỏi chung về quy chế học vụ, trả lời trực tiếp không cần gọi Tool."
+                "content": "[Mock Agent Response]: Xin chào! Tôi là trợ lý thông minh hỗ trợ nghiệp vụ học vụ VinUni và kho vận đơn hàng. Bạn cần hỗ trợ gì không?",
+                "thought": "Câu hỏi chung, trả lời trực tiếp không cần gọi Tool."
             }
 
 
