@@ -1,123 +1,24 @@
 [
   {
     "step": 1,
-    "query": "Chào bạn, bạn có thể giới thiệu quy chế học vụ cơ bản của Đại học VinUni không?",
-    "action_type": "FINAL_ANSWER",
-    "thought": "Gemini phản hồi trực tiếp bằng văn bản (không cần gọi công cụ).",
-    "output": "Chào bạn! Đại học VinUni áp dụng các tiêu chuẩn học vụ quốc tế với một số quy chế cơ bản sau:\n\n1. **Hệ thống tín chỉ và Đánh giá kết quả (GPA):** \n   - VinUni sử dụng hệ thống tín chỉ chuẩn Mỹ và thang điểm chữ (A, B, C, D, F) tương ứng với thang điểm 4.0 để tính Điểm trung bình tích lũy (GPA).\n   - Sinh viên cần duy trì mức GPA tối thiểu theo quy định của từng chương trình (thường là từ 2.0 trở lên) để đảm bảo tình trạng học tập tốt (Good Standing).\n\n2. **Cảnh cáo học vụ và Đình chỉ:**\n   - Nếu GPA trong kỳ hoặc GPA tích lũy của sinh viên rơi xuống dưới mức tiêu chuẩn trong một số học kỳ liên tiếp, sinh viên có thể nhận quyết định cảnh cáo học vụ (Academic Warning) hoặc đối mặt với nguy cơ buộc thôi học/đình chỉ học tập.\n\n3. **Cố vấn học tập (Academic Advising):**\n   - Mỗi sinh viên VinUni sẽ được phân công một Cố vấn học tập riêng để hỗ trợ định hướng nghề nghiệp, lựa chọn môn học và giải quyết các vấn đề liên quan đến tiến độ học tập.\n\n4. **Chính sách chuyên cần và Đạo đức học thuật:**\n   - VinUni có quy định rất nghiêm ngặt về tính trung thực học thuật (Academic Integrity). Các hành vi gian lận thi cử hay đạo văn (plagiarism) sẽ bị xử lý kỷ luật nghiêm khắc theo quy chế của trường.\n\nNếu bạn cần tra cứu thông tin học vụ cụ thể của một sinh viên hoặc đặt lịch hẹn với Cố vấn học tập, vui lòng cung cấp mã sinh viên nhé!",
-    "latency_ms": 3695.4
-  },
-  {
-    "step": 1,
-    "query": "Hãy tra cứu thông tin học vụ của sinh viên SV2026001.",
-    "action_type": "TOOL_EXECUTION",
-    "tool_name": "academic_query",
-    "arguments": {
-      "student_id": "SV2026001"
-    },
-    "observation": {
-      "status": "SUCCESS",
-      "student_id": "SV2026001",
-      "data": {
-        "full_name": "Nguyễn Văn An",
-        "class": "AI-K4",
-        "gpa": 3.85,
-        "email": "an.nv@vinuni.edu.vn",
-        "status": "Đang học",
-        "advisor": "PGS.TS Nguyễn Văn A"
-      }
-    },
-    "latency_ms": 893.4
-  },
-  {
-    "step": 2,
-    "query": "Hãy tra cứu thông tin học vụ của sinh viên SV2026001.",
-    "action_type": "FINAL_ANSWER",
-    "thought": "Gemini phản hồi trực tiếp bằng văn bản (không cần gọi công cụ).",
-    "output": "Dựa trên kết quả tra cứu học vụ của sinh viên có mã **SV2026001**, thông tin chi tiết như sau:\n\n* **Họ và tên:** Nguyễn Văn An\n* **Lớp:** AI-K4\n* **GPA:** 3.85\n* **Email:** an.nv@vinuni.edu.vn\n* **Trạng thái học tập:** Đang học\n* **Cố vấn học tập:** PGS.TS Nguyễn Văn A",
-    "latency_ms": 1141.35
-  },
-  {
-    "step": 1,
-    "query": "Cập nhật trạng thái của mã vận đơn DH2026001 thành 'Đã giao thành công'.",
-    "action_type": "TOOL_EXECUTION",
-    "tool_name": "order_status_update",
-    "arguments": {
-      "new_status": "Đã giao thành công",
-      "order_id": "DH2026001"
-    },
-    "observation": {
-      "status": "SUCCESS",
-      "order_id": "DH2026001",
-      "old_status": "Đang chờ xuất kho",
-      "new_status": "Đã giao thành công",
-      "message": "Cập nhật trạng thái đơn hàng DH2026001 thành công: 'Đang chờ xuất kho' → 'Đã giao thành công'."
-    },
-    "latency_ms": 974.6
-  },
-  {
-    "step": 2,
-    "query": "Cập nhật trạng thái của mã vận đơn DH2026001 thành 'Đã giao thành công'.",
-    "action_type": "FINAL_ANSWER",
-    "thought": "Gemini phản hồi trực tiếp bằng văn bản (không cần gọi công cụ).",
-    "output": "**Thought:** Người dùng muốn cập nhật trạng thái đơn hàng và kết quả thực hiện từ công cụ `order_status_update` đã được trả về trong Observation. Tôi sẽ tổng hợp lại thông tin đó để thông báo cho người dùng một cách rõ ràng và chính xác.\n\n**Trả lời:**\nTrạng thái của đơn hàng **DH2026001** đã được cập nhật thành công!\n- **Trạng thái cũ:** Đang chờ xuất kho\n- **Trạng thái mới:** Đã giao thành công",
-    "latency_ms": 1927.18
-  },
-  {
-    "step": 1,
-    "query": "Tra cứu vị trí hiện tại của đơn hàng DH2026002, nếu đang ở 'Kho Tổng' thì cập nhật trạng thái thành 'Đang điều phối xuất kho'.",
+    "query": "tra cứu đơn hàng có mã 'D200745940'",
     "action_type": "TOOL_EXECUTION",
     "tool_name": "order_tracking",
     "arguments": {
-      "order_id": "DH2026002"
-    },
-    "observation": {
-      "status": "SUCCESS",
-      "order_id": "DH2026002",
-      "data": {
-        "order_id": "DH2026002",
-        "customer": "Trần Văn Hùng",
-        "product": "Bàn phím cơ Keychron K2",
-        "quantity": 2,
-        "location": "Kho Tổng - HN",
-        "status": "Đang điều phối xuất kho",
-        "history": [
-          "Tiếp nhận đơn hàng",
-          "Kiểm tra hàng hoá",
-          "Đang điều phối xuất kho"
-        ]
-      }
-    },
-    "latency_ms": 986.07
-  },
-  {
-    "step": 2,
-    "query": "Tra cứu vị trí hiện tại của đơn hàng DH2026002, nếu đang ở 'Kho Tổng' thì cập nhật trạng thái thành 'Đang điều phối xuất kho'.",
-    "action_type": "FINAL_ANSWER",
-    "thought": "Gemini phản hồi trực tiếp bằng văn bản (không cần gọi công cụ).",
-    "output": "**Thought:** Đơn hàng DH2026002 có vị trí hiện tại là \"Kho Tổng - HN\" (thuộc Kho Tổng). Theo yêu cầu, nếu đang ở 'Kho Tổng' thì cập nhật trạng thái thành 'Đang điều phối xuất kho'. Tuy nhiên, trạng thái hiện tại của đơn hàng trong hệ thống cũng đã là \"Đang điều phối xuất kho\". Tôi sẽ gọi công cụ `order_status_update` để xác nhận và cập nhật lại trạng thái cho đơn hàng.\n\n*(Lưu ý: Do đây là mô phỏng mô hình ReAct, để hoàn tất quy trình cập nhật, hệ thống thực hiện lệnh cập nhật trạng thái dưới đây)*",
-    "latency_ms": 1410.76
-  },
-  {
-    "step": 1,
-    "query": "Kiểm tra mã vận đơn DH9999999 xem đang ở kho nào.",
-    "action_type": "TOOL_EXECUTION",
-    "tool_name": "order_tracking",
-    "arguments": {
-      "order_id": "DH9999999"
+      "order_id": "D200745940"
     },
     "observation": {
       "status": "NOT_FOUND",
-      "message": "Không tìm thấy đơn hàng có mã vận đơn 'DH9999999'"
+      "message": "Không tìm thấy đơn hàng có mã vận đơn 'D200745940'"
     },
-    "latency_ms": 891.89
+    "latency_ms": 30027.42
   },
   {
     "step": 2,
-    "query": "Kiểm tra mã vận đơn DH9999999 xem đang ở kho nào.",
+    "query": "tra cứu đơn hàng có mã 'D200745940'",
     "action_type": "FINAL_ANSWER",
     "thought": "Gemini phản hồi trực tiếp bằng văn bản (không cần gọi công cụ).",
-    "output": "Thought: Dựa vào kết quả Observation từ công cụ `order_tracking`, mã vận đơn `DH9999999` không tồn tại trong hệ thống kho vận.\n\nTôi xin thông báo: Không tìm thấy đơn hàng có mã vận đơn **DH9999999** trong hệ thống. Vui lòng kiểm tra lại mã vận đơn của bạn!",
-    "latency_ms": 1034.96
+    "output": "Dựa trên kết quả tra cứu từ hệ thống kho vận, hiện tại không tìm thấy đơn hàng nào có mã vận đơn `D200745940`. Bạn vui lòng kiểm tra lại mã vận đơn và thử lại nhé!",
+    "latency_ms": 1346.23
   }
 ]
