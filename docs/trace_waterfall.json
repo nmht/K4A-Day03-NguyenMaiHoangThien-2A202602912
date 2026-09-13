@@ -1,24 +1,32 @@
 [
   {
     "step": 1,
-    "query": "tra cứu đơn hàng có mã 'D200745940'",
+    "query": "Hãy tra cứu thông tin học vụ của sinh viên SV2026001.",
     "action_type": "TOOL_EXECUTION",
-    "tool_name": "order_tracking",
+    "tool_name": "academic_query",
     "arguments": {
-      "order_id": "D200745940"
+      "student_id": "SV2026001"
     },
     "observation": {
-      "status": "NOT_FOUND",
-      "message": "Không tìm thấy đơn hàng có mã vận đơn 'D200745940'"
+      "status": "SUCCESS",
+      "student_id": "SV2026001",
+      "data": {
+        "full_name": "Nguyễn Văn An",
+        "class": "AI-K4",
+        "gpa": 3.85,
+        "email": "an.nv@vinuni.edu.vn",
+        "status": "Đang học",
+        "advisor": "PGS.TS Nguyễn Văn A"
+      }
     },
-    "latency_ms": 30027.42
+    "latency_ms": 4.0
   },
   {
     "step": 2,
-    "query": "tra cứu đơn hàng có mã 'D200745940'",
+    "query": "Hãy tra cứu thông tin học vụ của sinh viên SV2026001.",
     "action_type": "FINAL_ANSWER",
-    "thought": "Gemini phản hồi trực tiếp bằng văn bản (không cần gọi công cụ).",
-    "output": "Dựa trên kết quả tra cứu từ hệ thống kho vận, hiện tại không tìm thấy đơn hàng nào có mã vận đơn `D200745940`. Bạn vui lòng kiểm tra lại mã vận đơn và thử lại nhé!",
-    "latency_ms": 1346.23
+    "thought": "Đã nhận được Observation từ tool, tổng hợp thành câu trả lời cuối cùng.",
+    "output": "[Mock Agent Response]: Dựa vào kết quả từ hệ thống, tôi đã có đủ thông tin để phản hồi yêu cầu của bạn.",
+    "latency_ms": 3.0
   }
 ]

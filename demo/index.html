@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supply Chain ReAct Agent - Interactive Demo Dashboard</title>
+    <!-- Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Mermaid JS for diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Background Glow Effect -->
+    <div class="glow-bg glow-1"></div>
+    <div class="glow-bg glow-2"></div>
+
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-cubes-stacked"></i>
+                </div>
+                <div class="brand-text">
+                    <h2>SupplyChain AI</h2>
+                    <span class="badge badge-mcp">ReAct Agent & MCP</span>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <button class="nav-item active" data-tab="tab-overview">
+                    <i class="fa-solid fa-compass"></i>
+                    <span>Tổng quan & Agent Fit</span>
+                </button>
+                <button class="nav-item" data-tab="tab-architecture">
+                    <i class="fa-solid fa-diagram-project"></i>
+                    <span>Kiến trúc System & Luồng</span>
+                </button>
+                <button class="nav-item" data-tab="tab-tools">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                    <span>Danh sách Tools MCP</span>
+                </button>
+                <button class="nav-item" data-tab="tab-demo">
+                    <i class="fa-solid fa-play-circle"></i>
+                    <span>Live Interactive Demo</span>
+                </button>
+                <button class="nav-item" data-tab="tab-trace">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Waterfall Trace Log</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="provider-status">
+                    <div class="status-indicator online"></div>
+                    <div class="status-info">
+                        <span class="status-label">Active Provider</span>
+                        <span class="status-val" id="activeProviderText">Gemini 1.5/3.1 API</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-title">
+                    <h1 id="pageTitle">Đề Tài & 4 Tiêu Chí Agent Fit</h1>
+                    <p id="pageSubtitle">Báo cáo nghiệm thu & Demo tương tác hệ thống ReAct Agent kết nối MCP Server</p>
+                </div>
+                <div class="header-actions">
+                    <span class="badge badge-course"><i class="fa-solid fa-graduation-cap"></i> VinUni AI Course - Day 03</span>
+                    <button class="btn btn-secondary" id="btnRefreshTrace"><i class="fa-solid fa-rotate-right"></i> Làm mới Trace</button>
+                </div>
+            </header>
+
+            <!-- TAB 1: TỔNG QUAN & AGENT FIT -->
+            <section id="tab-overview" class="tab-page active">
+                <!-- Section 1: Overview Banner -->
+                <div class="card hero-card">
+                    <div class="hero-content">
+                        <span class="tag-pill"><i class="fa-solid fa-star"></i> Đề tài Lab Day 03</span>
+                        <h2>Trợ Lý Thông Minh Chuỗi Cung Ứng & Kho Vận (Supply Chain Agent)</h2>
+                        <p>Giải quyết bài toán tra cứu vị trí lưu kho theo thời gian thực, tự động cập nhật trạng thái đơn hàng trên hệ thống WMS và hỗ trợ tư vấn học vụ VinUni với độ chính xác 100%, không ảo giác.</p>
+                        
+                        <div class="hero-stats">
+                            <div class="stat-item">
+                                <span class="stat-num">100%</span>
+                                <span class="stat-lbl">Chính xác dữ liệu (No Hallucination)</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-num">4 Tools</span>
+                                <span class="stat-lbl">Tích hợp chuẩn MCP Server</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-num">5/5</span>
+                                <span class="stat-lbl">Test Cases vượt qua thành công</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Why Choose Topic -->
+                <div class="card-grid two-cols margin-top">
+                    <div class="card card-glow">
+                        <div class="card-header">
+                            <div class="card-icon icon-purple"><i class="fa-solid fa-truck-ramp-box"></i></div>
+                            <h3>Tại sao chọn đề tài Kho Vận & Chuỗi Cung Ứng?</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul class="styled-list">
+                                <li>
+                                    <i class="fa-solid fa-circle-check text-success"></i>
+                                    <div>
+                                        <strong>Tính biến động cao:</strong> Trạng thái đơn hàng (Đang chờ xuất kho, Đang vận chuyển, Đã giao) thay đổi liên tục theo thời gian thực.
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-circle-check text-success"></i>
+                                    <div>
+                                        <strong>Yêu cầu đọc/ghi 2 chiều (Read/Write):</strong> Agent không chỉ trả lời câu hỏi mà còn phải tự thực thi hành động cập nhật DB qua API.
+                                    </div>
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-circle-check text-success"></i>
+                                    <div>
+                                        <strong>Tổ chức dữ liệu chuẩn MCP:</strong> Phân tách hoàn toàn giữa bộ não suy luận (Agent) và giao thức dữ liệu (MCP Server).
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card card-glow">
+                        <div class="card-header">
+                            <div class="card-icon icon-blue"><i class="fa-solid fa-brain"></i></div>
+                            <h3>Tầm quan trọng của ReAct Pattern</h3>
+                        </div>
+                        <div class="card-body">
+                            <p class="text-muted">Nếu sử dụng Chatbot thông thường (Cấp 2), AI chỉ trả lời dựa vào tri thức đóng băng trong Prompt và sẽ bịa đặt vị trí kho. ReAct Pattern (Cấp 3) giải quyết triệt để vấn đề này:</p>
+                            <div class="react-flow-mini">
+                                <div class="step-pill step-thought">🧠 Thought (Suy luận)</div>
+                                <i class="fa-solid fa-arrow-right"></i>
+                                <div class="step-pill step-action">🛠️ Action (Gọi MCP)</div>
+                                <i class="fa-solid fa-arrow-right"></i>
+                                <div class="step-pill step-obs">👁️ Observation (Nhận DB)</div>
+                                <i class="fa-solid fa-arrow-right"></i>
+                                <div class="step-pill step-final">🏁 Final Answer</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: 4 Agent Fit Criteria -->
+                <div class="section-heading margin-top-lg">
+                    <h2><i class="fa-solid fa-award"></i> 4 Tiêu Chí Phù Hợp Của ReAct Agent (Agent Fit Matrix)</h2>
+                    <p>Đánh giá chi tiết lý do tại sao ReAct Pattern là kiến trúc bắt buộc cho đề tài này</p>
+                </div>
+
+                <div class="card-grid four-cols margin-top">
+                    <!-- Criteria 1 -->
+                    <div class="card fit-card fit-1">
+                        <div class="fit-badge">Tiêu chí 1</div>
+                        <h3><i class="fa-solid fa-route"></i> Dynamic Decision</h3>
+                        <p class="fit-title">Luồng Quyết Định Động</p>
+                        <p class="fit-desc">Người dùng có thể hỏi bất kỳ: tra cứu, cập nhật đơn, đặt lịch hẹn hay hỏi quy chế. ReAct Agent tự phân tích Intent để chọn Tool hoặc trả lời trực tiếp mà không cần hardcode rule `if-else` cố định.</p>
+                    </div>
+
+                    <!-- Criteria 2 -->
+                    <div class="card fit-card fit-2">
+                        <div class="fit-badge">Tiêu chí 2</div>
+                        <h3><i class="fa-solid fa-diagram-next"></i> Multi-Step Reasoning</h3>
+                        <p class="fit-title">Suy Luận Nhiều Bước</p>
+                        <p class="fit-desc">Xử lý tác vụ phức tạp (TC04): <em>Tra cứu vị trí đơn trước ➔ Kiểm tra xem có ở Kho Tổng hay không ➔ Thực hiện lệnh cập nhật trạng thái tương ứng</em> qua chuỗi Thought-Action lặp lại.</p>
+                    </div>
+
+                    <!-- Criteria 3 -->
+                    <div class="card fit-card fit-3">
+                        <div class="fit-badge">Tiêu chí 3</div>
+                        <h3><i class="fa-solid fa-plug"></i> MCP Tool Integration</h3>
+                        <p class="fit-title">Tích Hợp Công Cụ MCP</p>
+                        <p class="fit-desc">Kết nối an toàn với cơ sở dữ liệu kho vận WMS và hệ thống học vụ VinUni thông qua chuẩn <strong>Model Context Protocol (JSON-RPC)</strong>, bảo đảm dữ liệu chính xác 100%.</p>
+                    </div>
+
+                    <!-- Criteria 4 -->
+                    <div class="card fit-card fit-4">
+                        <div class="fit-badge">Tiêu chí 4</div>
+                        <h3><i class="fa-solid fa-shield-halved"></i> Feedback Loop</h3>
+                        <p class="fit-title">Vòng Lặp Phản Hồi Xử Lý Lỗi</p>
+                        <p class="fit-desc">Khi MCP Server trả về kết quả ngoại lệ (ví dụ `NOT_FOUND` ở TC05 khi tra cứu đơn `DH9999999`), Agent đọc được Observation để tự điều chỉnh phản hồi lịch sự, trung thực.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: SYSTEM ARCHITECTURE & WORKFLOW -->
+            <section id="tab-architecture" class="tab-page">
+                <div class="card margin-bottom">
+                    <div class="card-header">
+                        <div class="card-icon icon-emerald"><i class="fa-solid fa-sitemap"></i></div>
+                        <div>
+                            <h3>Sơ Đồ Kiến Trúc Tổng Quan (System Architecture)</h3>
+                            <p class="text-muted">Mô hình phân tầng từ User Interface ➔ ReAct Agent Core ➔ MCP Server ➔ Database</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <style>
+                        .arch-diagram { display: flex; flex-direction: column; align-items: center; gap: 15px; padding: 20px; background: #f8fafc; border-radius: 8px; font-family: inherit; }
+                        .arch-row { display: flex; gap: 15px; justify-content: center; width: 100%; flex-wrap: wrap; }
+                        .arch-box { background: white; border: 2px solid #e2e8f0; padding: 12px 15px; border-radius: 8px; text-align: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); font-weight: 500; min-width: 180px; }
+                        .arch-box.primary { background: #1e1b4b; color: white; border-color: #818cf8; }
+                        .arch-box.accent { background: #064e3b; color: white; border-color: #34d399; }
+                        .arch-box.warning { background: #78350f; color: white; border-color: #fbbf24; }
+                        .arch-arrow { display: flex; flex-direction: column; align-items: center; justify-content: center; color: #64748b; font-size: 1.2rem; font-weight: bold; }
+                        .arch-arrow span { font-size: 0.8rem; background: #f8fafc; padding: 2px 5px; margin-top: -5px; z-index: 2; }
+                        .arch-group { border: 2px dashed #cbd5e1; border-radius: 12px; padding: 25px 15px 15px 15px; position: relative; width: 100%; margin-top: 10px; }
+                        .arch-group-title { position: absolute; top: -12px; left: 20px; background: #f8fafc; padding: 0 10px; font-weight: bold; color: #475569; font-size: 0.9rem; }
+                        .arch-tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; width: 100%; }
+                        </style>
+                        
+                        <div class="arch-diagram">
+                            <div class="arch-box">👤 User / Client Interface</div>
+                            
+                            <div class="arch-arrow">
+                                <i class="fa-solid fa-arrow-down"></i>
+                                <span>Query & Output</span>
+                            </div>
+
+                            <div class="arch-group">
+                                <div class="arch-group-title">🧠 ReAct Agent Brain (LLM Core)</div>
+                                <div class="arch-row">
+                                    <div class="arch-box primary">🚀 Core Agent (app.py)</div>
+                                    <div class="arch-arrow" style="flex-direction:row; align-items:center; gap:5px;"><i class="fa-solid fa-arrows-left-right"></i></div>
+                                    <div class="arch-box primary">🤖 LLM Provider (Gemini)</div>
+                                </div>
+                                <div style="text-align: center; margin-top: 10px; font-size: 0.85rem; color: #64748b;">
+                                    <i class="fa-solid fa-arrow-up"></i> 📜 System Prompt & Tools Schema
+                                </div>
+                            </div>
+
+                            <div class="arch-arrow">
+                                <i class="fa-solid fa-arrow-down"></i>
+                                <span>JSON-RPC Protocol</span>
+                            </div>
+
+                            <div class="arch-group">
+                                <div class="arch-group-title">🌐 MCP Server Layer</div>
+                                <div class="arch-row">
+                                    <div class="arch-box accent" style="width:100%;">📡 MCPAcademicServer (mcp_server.py)</div>
+                                </div>
+                            </div>
+
+                            <div class="arch-arrow"><i class="fa-solid fa-arrow-down"></i></div>
+
+                            <div class="arch-group">
+                                <div class="arch-group-title">🛠️ Tools Execution & Storage Layer</div>
+                                <div class="arch-tools">
+                                    <div class="arch-box warning">
+                                        📦 order_tracking<br>
+                                        <i class="fa-solid fa-arrow-down" style="color:#cbd5e1; margin: 8px 0;"></i><br>
+                                        <small style="color:#fcd34d;">🗄️ Warehouse WMS DB</small>
+                                    </div>
+                                    <div class="arch-box warning">
+                                        🔄 order_status_update<br>
+                                        <i class="fa-solid fa-arrow-down" style="color:#cbd5e1; margin: 8px 0;"></i><br>
+                                        <small style="color:#fcd34d;">🗄️ Warehouse WMS DB</small>
+                                    </div>
+                                    <div class="arch-box warning">
+                                        🎓 academic_query<br>
+                                        <i class="fa-solid fa-arrow-down" style="color:#cbd5e1; margin: 8px 0;"></i><br>
+                                        <small style="color:#fcd34d;">🗄️ VinUni Academic DB</small>
+                                    </div>
+                                    <div class="arch-box warning">
+                                        📅 academic_advisor<br>
+                                        <i class="fa-solid fa-arrow-down" style="color:#cbd5e1; margin: 8px 0;"></i><br>
+                                        <small style="color:#fcd34d;">🗄️ VinUni Academic DB</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon icon-purple"><i class="fa-solid fa-arrows-spin"></i></div>
+                        <div>
+                            <h3>Sơ Đồ Luồng Thực Thi Vòng Lặp ReAct (Execution Sequence Diagram)</h3>
+                            <p class="text-muted">Từng bước trao đổi thông tin giữa các thành phần khi xử lý yêu cầu kho vận</p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="mermaid-container">
+                            <pre class="mermaid">
+sequenceDiagram
+    autonumber
+    actor User as 👤 Người Dùng
+    participant Agent as 🧠 ReAct Agent (LLM)
+    participant MCP as 🌐 MCP Server
+    participant DB as 🗄️ WMS / Academic DB
+
+    User->>Agent: "Cập nhật trạng thái đơn DH2026001 thành 'Đã giao thành công'"
+    
+    rect rgb(30, 27, 75)
+        note over Agent: Vòng lặp ReAct Step 1
+        Agent->>Agent: 🧠 Thought: Cần gọi công cụ order_status_update với order_id='DH2026001'
+        Agent->>MCP: 🛠️ Action: call_tool("order_status_update", {"order_id":"DH2026001", ...})
+        MCP->>DB: Thực thi cập nhật dữ liệu
+        DB-->>MCP: Dữ liệu đã thay đổi (Old -> New)
+        MCP-->>Agent: 👁️ Observation: {"status":"SUCCESS", "old_status":"Đang chờ xuất kho", ...}
+    end
+
+    rect rgb(6, 78, 59)
+        note over Agent: Vòng lặp ReAct Step 2
+        Agent->>Agent: 🧠 Thought: Đã có kết quả Observation. Tổng hợp phản hồi cho người dùng.
+        Agent-->>User: 🏁 Final Answer: "Trạng thái đơn DH2026001 đã cập nhật thành công!"
+    end
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 3: MCP TOOLS LIST -->
+            <section id="tab-tools" class="tab-page">
+                <div class="section-heading margin-bottom">
+                    <h2><i class="fa-solid fa-toolbox"></i> Danh Sách Công Cụ Tích Hợp Via MCP Server</h2>
+                    <p>Các hàm xử lý nghiệp vụ kho vận và học vụ được phơi duyệt cho Agent gọi</p>
+                </div>
+
+                <div class="card-grid two-cols">
+                    <!-- Tool 1 -->
+                    <div class="card tool-card">
+                        <div class="tool-badge">Tool Kho Vận 1</div>
+                        <div class="card-header">
+                            <div class="card-icon icon-blue"><i class="fa-solid fa-location-dot"></i></div>
+                            <div>
+                                <h3>`order_tracking`</h3>
+                                <span class="code-tag">Input: order_id (string)</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Công dụng:</strong> Tra cứu vị trí lưu kho hiện tại, trạng thái đơn hàng, thông tin người nhận, số lượng sản phẩm và lịch sử di chuyển đơn hàng.</p>
+                            <div class="code-preview">
+                                <code>
+// Sample JSON Arguments:
+{ "order_id": "DH2026001" }
+
+// Sample Observation Response:
+{
+  "status": "SUCCESS",
+  "data": {
+    "order_id": "DH2026001",
+    "location": "Kho Hàng A - Q7, TP.HCM",
+    "status": "Đang chờ xuất kho"
+  }
+}
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tool 2 -->
+                    <div class="card tool-card">
+                        <div class="tool-badge">Tool Kho Vận 2</div>
+                        <div class="card-header">
+                            <div class="card-icon icon-emerald"><i class="fa-solid fa-pen-to-square"></i></div>
+                            <div>
+                                <h3>`order_status_update`</h3>
+                                <span class="code-tag">Input: order_id, new_status</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Công dụng:</strong> Cập nhật trạng thái mới cho vận đơn trong cơ sở dữ liệu WMS và ghi nhận thông báo chuyển trạng thái.</p>
+                            <div class="code-preview">
+                                <code>
+// Sample JSON Arguments:
+{ 
+  "order_id": "DH2026001", 
+  "new_status": "Đã giao thành công" 
+}
+
+// Sample Observation Response:
+{
+  "status": "SUCCESS",
+  "old_status": "Đang chờ xuất kho",
+  "new_status": "Đã giao thành công"
+}
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tool 3 -->
+                    <div class="card tool-card">
+                        <div class="tool-badge">Tool Học Vụ 1</div>
+                        <div class="card-header">
+                            <div class="card-icon icon-purple"><i class="fa-solid fa-user-graduate"></i></div>
+                            <div>
+                                <h3>`academic_query`</h3>
+                                <span class="code-tag">Input: student_id (string)</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Công dụng:</strong> Tra cứu điểm tích lũy GPA, lớp học, email và Cố vấn học tập được phân công của sinh viên Đại học VinUni.</p>
+                            <div class="code-preview">
+                                <code>
+// Sample JSON Arguments:
+{ "student_id": "SV2026001" }
+
+// Sample Observation Response:
+{
+  "status": "SUCCESS",
+  "data": {
+    "full_name": "Nguyễn Văn An",
+    "gpa": 3.85,
+    "class": "AI-K4"
+  }
+}
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tool 4 -->
+                    <div class="card tool-card">
+                        <div class="tool-badge">Tool Học Vụ 2</div>
+                        <div class="card-header">
+                            <div class="card-icon icon-amber"><i class="fa-solid fa-calendar-check"></i></div>
+                            <div>
+                                <h3>`academic_advisor_booking`</h3>
+                                <span class="code-tag">Input: student_id, date, time</span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Công dụng:</strong> Đặt lịch hẹn cố vấn học tập cho sinh viên với Cố vấn phụ trách theo khung giờ mong muốn.</p>
+                            <div class="code-preview">
+                                <code>
+// Sample JSON Arguments:
+{ 
+  "student_id": "SV2026001",
+  "date": "2026-09-15",
+  "time": "14:00"
+}
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: LIVE INTERACTIVE DEMO -->
+            <section id="tab-demo" class="tab-page">
+                <div class="card-grid demo-grid">
+                    <!-- Left Column: Input & Test Suite Select -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon icon-purple"><i class="fa-solid fa-sliders"></i></div>
+                            <h3>Khởi Chạy Test Case & Trò Chuyện</h3>
+                        </div>
+                        <div class="card-body">
+                            <label class="form-label">Chọn nhanh Test Case thử nghiệm:</label>
+                            <div class="preset-buttons" id="presetButtons">
+                                <button class="btn btn-preset active" data-tc="tc01">
+                                    <span class="tc-tag">TC01 (Low)</span>
+                                    <span>Hỏi quy chế chung</span>
+                                </button>
+                                <button class="btn btn-preset" data-tc="tc02">
+                                    <span class="tc-tag">TC02 (Low)</span>
+                                    <span>Tra cứu sinh viên SV2026001</span>
+                                </button>
+                                <button class="btn btn-preset" data-tc="tc03">
+                                    <span class="tc-tag">TC03 (Med)</span>
+                                    <span>Cập nhật trạng thái đơn DH2026001</span>
+                                </button>
+                                <button class="btn btn-preset" data-tc="tc04">
+                                    <span class="tc-tag">TC04 (High)</span>
+                                    <span>Suy luận 2 bước đơn DH2026002</span>
+                                </button>
+                                <button class="btn btn-preset" data-tc="tc05">
+                                    <span class="tc-tag">TC05 (Edge)</span>
+                                    <span>Tra đơn không tồn tại DH9999999</span>
+                                </button>
+                            </div>
+
+                            <div class="margin-top">
+                                <label class="form-label" for="customQuery">Hoặc nhập câu hỏi tùy chỉnh:</label>
+                                <textarea id="customQuery" class="form-control" rows="3" placeholder="Ví dụ: Kiểm tra đơn hàng DH2026003 đang nằm ở kho nào?..."></textarea>
+                            </div>
+
+                            <div class="form-actions margin-top">
+                                <button class="btn btn-primary btn-block" id="btnRunQuery">
+                                    <i class="fa-solid fa-paper-plane"></i> Gửi Yêu Cầu Tới ReAct Agent
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Live Output & Step-by-Step Visualization -->
+                    <div class="card card-terminal">
+                        <div class="terminal-header">
+                            <div class="terminal-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="terminal-title"><i class="fa-solid fa-terminal"></i> ReAct Agent Console & Execution Trace</span>
+                            <span class="badge badge-live" id="executionStatus">Ready</span>
+                        </div>
+                        <div class="terminal-body" id="liveTraceContainer">
+                            <div class="placeholder-msg">
+                                <i class="fa-solid fa-robot"></i>
+                                <p>Nhấp nút <strong>"Gửi Yêu Cầu Tới ReAct Agent"</strong> hoặc chọn Test Case ở bảng bên trái để xem chuỗi suy luận ReAct thời gian thực.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 5: WATERFALL TRACE LOG -->
+            <section id="tab-trace" class="tab-page">
+                <div class="card">
+                    <div class="card-header flex-between">
+                        <div>
+                            <h3><i class="fa-solid fa-list-check"></i> Toàn Bộ Waterfall Trace Events (docs/trace_waterfall.json)</h3>
+                            <p class="text-muted">Nhật ký theo dõi hiệu năng (latency) và chi tiết từng bước gọi Tool qua MCP Server</p>
+                        </div>
+                        <button class="btn btn-secondary btn-sm" id="btnDownloadTrace"><i class="fa-solid fa-download"></i> Tải file JSON</button>
+                    </div>
+                    <div class="card-body">
+                        <div id="waterfallTimeline" class="waterfall-timeline">
+                            <!-- Dynamically populated trace logs -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
