@@ -28,21 +28,30 @@ Dán 1 đoạn trích xuất log tiêu biểu từ file `docs/trace_waterfall.js
 [
   {
     "step": 1,
+    "query": "Cập nhật trạng thái của mã vận đơn DH2026001 thành 'Đã giao thành công'.",
     "action_type": "TOOL_EXECUTION",
-    "tool_name": "academic_query",
+    "tool_name": "order_status_update",
     "arguments": {
-      "student_id": "SV2026001"
+      "new_status": "Đã giao thành công",
+      "order_id": "DH2026001"
     },
     "observation": {
       "status": "SUCCESS",
-      "student_id": "SV2026001",
-      "data": {
-        "full_name": "Nguyễn Văn An",
-        "gpa": 3.85
-      }
+      "order_id": "DH2026001",
+      "old_status": "Đang chờ xuất kho",
+      "new_status": "Đã giao thành công",
+      "message": "Cập nhật trạng thái đơn hàng DH2026001 thành công: 'Đang chờ xuất kho' → 'Đã giao thành công'."
     },
-    "latency_ms": 120.5
-  }
+    "latency_ms": 974.6
+  },
+  {
+    "step": 2,
+    "query": "Cập nhật trạng thái của mã vận đơn DH2026001 thành 'Đã giao thành công'.",
+    "action_type": "FINAL_ANSWER",
+    "thought": "Gemini phản hồi trực tiếp bằng văn bản (không cần gọi công cụ).",
+    "output": "**Thought:** Người dùng muốn cập nhật trạng thái đơn hàng và kết quả thực hiện từ công cụ `order_status_update` đã được trả về trong Observation. Tôi sẽ tổng hợp lại thông tin đó để thông báo cho người dùng một cách rõ ràng và chính xác.\n\n**Trả lời:**\nTrạng thái của đơn hàng **DH2026001** đã được cập nhật thành công!\n- **Trạng thái cũ:** Đang chờ xuất kho\n- **Trạng thái mới:** Đã giao thành công",
+    "latency_ms": 1927.18
+  },
 ]
 ```
 
@@ -50,10 +59,10 @@ Dán 1 đoạn trích xuất log tiêu biểu từ file `docs/trace_waterfall.js
 
 ## 3. TỔNG KẾT KẾT QUẢ NGHIỆM THU & NỘP BÀI
 
-- [ ] Đã điền API Key thật trong `.env` và xác nhận Agent chạy mượt mà trên LLM API thật (Gemini/OpenAI).
-- **Tổng số Test Cases đã chạy thành công:** ___ / 5 test cases.
-- **Số lượt gọi Tool qua MCP Server chính xác:** ___ lượt.
-- **Kết quả đẩy Repo nộp bài:** [ ] Đã Commit và Push mã nguồn thành công lên GitHub cá nhân.
+- [x] Đã điền API Key thật trong `.env` và xác nhận Agent chạy mượt mà trên LLM API thật (Gemini/OpenAI).
+- **Tổng số Test Cases đã chạy thành công:** 5 / 5 test cases.
+- **Số lượt gọi Tool qua MCP Server chính xác:** 4 lượt.
+- **Kết quả đẩy Repo nộp bài:** [x] Đã Commit và Push mã nguồn thành công lên GitHub cá nhân.
 
 ---
 
